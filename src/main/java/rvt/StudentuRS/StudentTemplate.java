@@ -6,13 +6,18 @@ public class StudentTemplate{
     private String lastName;
     private String email;
     private String personalCode;
-    private String registrationDate;
+    private String registrationDate = "testing"; // Needs to be done
 
     public StudentTemplate(String firstName, String lastName, String email, String personalCode){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.personalCode = personalCode;
+    }
+    public String[] toRow(){
+        return new String[] {
+            firstName, lastName, email, personalCode, registrationDate
+        };
     }
 
     public String toString(){

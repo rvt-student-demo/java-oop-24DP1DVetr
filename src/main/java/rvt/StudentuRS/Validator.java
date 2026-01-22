@@ -1,11 +1,10 @@
 package rvt.StudentuRS;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Validator {
     
-    public static boolean validateEmail(String email, List<StudentTemplate> studentsData){
+    public static boolean validateEmail(String email, List<StudentTemplate> studentsData){ //add date and time form checking
 
         for (StudentTemplate s : studentsData){
             if(s.getEmail().equalsIgnoreCase(email)){
@@ -14,23 +13,13 @@ public class Validator {
         }
         return true;
     }
-        public static boolean validatePersonalCode(String personalCode, List<StudentTemplate> studentsData){
+        public static boolean validatePersonalCode(String personalCode, List<StudentTemplate> studentsData){ //add xxxx--xxx checking
 
         for (StudentTemplate s : studentsData){
-            if(s.getEmail().equalsIgnoreCase(personalCode)){
+            if(s.getPersonalCode().equalsIgnoreCase(personalCode)){
                 return false;
             }
         }
         return true;
     }
-        public static boolean validateName(String email, List<StudentTemplate> studentsData){
-
-        for (StudentTemplate s : studentsData){
-            if(s.getEmail().equalsIgnoreCase(email)){
-                return false;
-            }
-        }
-        return true;
-    }
-    
 }
