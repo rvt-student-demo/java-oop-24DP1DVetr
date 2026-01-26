@@ -1,40 +1,64 @@
 package rvt.StudentuRS;
-import java.time.LocalDateTime;
 
-public class StudentTemplate{
+public class StudentTemplate {
     private String firstName;
     private String lastName;
     private String email;
     private String personalCode;
-    private String registrationDate = "testing"; // Needs to be done
+    private String registrationDate;
 
-    public StudentTemplate(String firstName, String lastName, String email, String personalCode){
+    public StudentTemplate(String firstName, String lastName, String email, String personalCode, String registrationDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.personalCode = personalCode;
+        this.registrationDate = registrationDate;
     }
-    public String[] toRow(){
+
+    public String toString() {
+        return firstName + "," + lastName + "," + email + "," + personalCode + "," + registrationDate;
+    }
+
+    public String editName(String firstName) {
+        this.firstName = firstName;
+        return firstName;
+    }
+
+    public String editLastName(String lastName) {
+        this.lastName = lastName;
+        return lastName;
+    }
+
+    public String editEmail(String email) {
+        this.email = email;
+        return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPersonalCode() {
+        return personalCode;
+    }
+
+    public String[] toRow() {
         return new String[] {
-            firstName, lastName, email, personalCode, registrationDate
+                firstName, lastName, email, personalCode, registrationDate
         };
     }
 
-    public String toString(){
-        return firstName + "," + lastName + "," + email + "," + personalCode + "," + registrationDate;
-    }
-    public String Name(){
-        return firstName + lastName;
-    }
-    public String getEmail(){
-        return email;
-    }
-    public String getPersonalCode(){
-        return personalCode;
-    }
-    public static StudentTemplate readCSV(String line){
+    public static StudentTemplate readCSV(String line) {
         String[] parts = line.split(",");
-        StudentTemplate student = new StudentTemplate(parts[0], parts[1], parts[2], parts[3]);
+        StudentTemplate student = new StudentTemplate(parts[0], parts[1], parts[2], parts[3], parts[4]);
         return student;
     }
 }

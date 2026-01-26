@@ -1,5 +1,3 @@
-a,w,wq,123,22
-Mama,WWA,alala,1345,11
-sss,hehe,ewjk,566,3332
-Dmitrijs,Vetrovs,d.vetrovs,1407,null
-Dmitrijs,Vetrovs,a242240,121345,testing
+FirstName,LastName,Email,PersonalCode,RegistrationDate
+Alex,Anderson,s@wq,123456-12345,26-01-2026 23:14:36
+John,Waterson,alpha.beta@gmail.com,565656-12345,26-01-2026 23:15:15
