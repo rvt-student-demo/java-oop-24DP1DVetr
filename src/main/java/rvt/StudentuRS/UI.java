@@ -29,6 +29,9 @@ public class UI {
                 case "find":
                     registration.findStudent();
                     break;
+                case "help":
+                    System.out.println("  Commands: register  show  find  remove  edit  exit");
+                    break;
                 case "exit":
                     System.out.println("Exiting SRS....");
                     return;

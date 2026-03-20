@@ -25,7 +25,12 @@ public class Registration {
             if (cancel(firstName)) {
                 return;
             }
-            checkEmpty(firstName);
+            if (checkEmpty(firstName)){
+                continue;
+            } else if (!Validator.validateName(firstName)){
+                firstName = "";
+                System.out.println("The name must not contain any numbers or special characters and must be at least 3 letters long.");
+            }
         } while (firstName.isEmpty());
 
         String lastName;
@@ -34,8 +39,13 @@ public class Registration {
             lastName = scanner.nextLine().trim();
             if (cancel(lastName)) {
                 return;
+            } 
+            if (checkEmpty(lastName)){
+                continue;
+            } else if (!Validator.validateName(lastName)){
+                lastName = "";
+                System.out.println("The last name must not contain any numbers or special characters and must be at least 3 letters long.");
             }
-            checkEmpty(lastName);
         } while (lastName.isEmpty());
 
         String email;
@@ -47,7 +57,7 @@ public class Registration {
             }
             if (checkEmpty(email)) {
                 continue;
-            } else if (!Validator.validateEmail(email, students)) {
+            } else if (!Validator.validateEmail(email)) {
                 System.out.println("Email is incorrect.");
                 email = "";
             } else if (!Validator.emailUniqueness(email, students)) {
@@ -65,7 +75,7 @@ public class Registration {
             }
             if (checkEmpty(personalCode)) {
                 continue;
-            } else if (!Validator.validatePersonalCode(personalCode, students)) {
+            } else if (!Validator.validatePersonalCode(personalCode)) {
                 System.out.println("Personal code is incorrect.");
                 personalCode = "";
             } else if (!Validator.personalCodeUniqueness(personalCode, students)) {
@@ -136,19 +146,19 @@ public class Registration {
                     Options: name | last name | email | cancel
                     """);
             String userOption = scanner.nextLine().toLowerCase().trim();
-            String newName = "";
-            String newLastName = "";
-            String newEmail = "";
             switch (userOption) {
                 case "name":
                     while (true) {
                         System.out.print("  Student new name: ");
-                        newName = scanner.nextLine().trim();
+                        String newName = scanner.nextLine().trim();
                         if (cancel(newName)) {
                             editing = false;
                             break;
                         } else if (newName.isEmpty()) {
                             System.out.println("You need to write something.");
+                            continue;
+                        } else if (!Validator.validateName(newName)){
+                            System.out.println("The name must not contain any numbers or special characters and must be at least 3 letters long.");
                             continue;
                         }
                         s.editName(newName);
@@ -159,12 +169,15 @@ public class Registration {
                 case "last name":
                     while (true) {
                         System.out.print("  Student new last name: ");
-                        newLastName = scanner.nextLine().trim();
+                        String newLastName = scanner.nextLine().trim();
                         if (cancel(newLastName)) {
                             editing = false;
                             break;
                         } else if (newLastName.isEmpty()) {
                             System.out.println("You need to write something.");
+                            continue;
+                        } else if (!Validator.validateName(newLastName)){
+                            System.out.println("The last name must not contain any numbers or special characters and must be at least 3 letters long.");
                             continue;
                         }
                         s.editLastName(newLastName);
@@ -175,14 +188,14 @@ public class Registration {
                 case "email":
                     while (true) {
                         System.out.print("  Student new email: ");
-                        newEmail = scanner.nextLine().trim();
+                        String newEmail = scanner.nextLine().trim();
                         if (cancel(newEmail)) {
                             editing = false;
                             break;
                         } else if (newEmail.isEmpty()) {
                             System.out.println("You need to write something.");
                             continue;
-                        } else if (!Validator.validateEmail(newEmail, students)) {
+                        } else if (!Validator.validateEmail(newEmail)) {
                             System.out.println("Email is incorrect.");
                             continue;
                         } else if (!Validator.emailUniqueness(newEmail, students)) {
@@ -200,7 +213,7 @@ public class Registration {
                     break;
                 default:
                     System.out.println("No such command.");
-                    break;
+                    continue;
             }
             if (editedAtLeastOnce) {
                 System.out.print("Do you want to edit another field? (y/n): ");
