@@ -18,13 +18,16 @@ public class House {
     }
     public static void main(String[] args) {
         new House();
-    }
+    }   
 }
 
 class ComponentHouse extends JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-		g.drawOval(10, 10, 200, 200);
+		g.drawRect(100, 100, 100, 100);
+        g.drawRect(150, 170, 20, 30);
+        g.drawLine(100, 100, 150, 50);
+        g.drawLine(150, 50, 200, 100);
     }
 }

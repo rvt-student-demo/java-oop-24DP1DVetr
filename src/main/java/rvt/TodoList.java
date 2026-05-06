@@ -1,46 +1,58 @@
 package rvt;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.List;
 
-public class TodoList{
-    private static final String file_path  = "data/todolist.csv";
-    public void add(String text){
-        try (BufferedWriter writer = 
-                new BufferedWriter(new FileWriter(file_path, true))){
-            writer.write(text);
-            writer.newLine();
-        } catch (IOException e){
+public class TodoList {
+    private static final String file_path = "data/todolist.csv";
+    private ArrayList<String[]> tasks;
+
+    public TodoList() {
+        tasks = new ArrayList<>();
+        loadFromFile();
+    }
+
+    
+    public void add(String text) {
+        
+    }
+    public void print() {
+        for (int i = 0; i < tasks.size(); i++) {
+            String[] task = tasks.get(i);
+            System.out.println("Id: " + task[0] + " | Tasks: " + task[1]);
+        }
+    }
+
+    public void remove(int index) {
+        if (index >= 0 && index < tasks.size()) {
+            tasks.remove(index);
+            System.out.println("Task at index " + index + " removed.");
+        } else {
+            System.out.println("Error: Index out of bounds.");
+        }
+    }
+    
+    private void WriteToFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file_path, true))) {
+            
+        } catch (IOException e) {
             System.out.println("Error adding message: " + e.getMessage());
         }
     }
-    public void print(){
-        try (Scanner scanner = new Scanner(new File(file_path))){
-            int StrIndex = 1;
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
-                if (!line.isEmpty()) {
-                    System.out.println(StrIndex + ": "+ line);
-                    StrIndex ++;
+    
+    private void loadFromFile() {
+        try (BufferedReader br = new BufferedReader(new FileReader(file_path))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                tasks.add(parts);
             }
-        }
-        } catch (IOException e){
-            System.out.println("Error outputting message: " + e.getMessage());
-        }
-    }
-    public void remove(int index){
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(file_path));
-            if (index < 1 || index > lines.size()){
-                System.out.println("No such a line.");
-                return;
-            }
-            lines.remove(index - 1);
-            Files.write(Paths.get(file_path), lines);
-        } catch (IOException e){
-            System.out.println("Error removing line: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
         }
     }
 }
